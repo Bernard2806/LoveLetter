@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para mi amor</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5e6e6;
+            margin: 0;
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .envelope:before {
+            content: '';
+            position: absolute;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #f0f0f0;
+            top: -100px;
+            left: 0;
+        }
+
+        .letter {
+            position: absolute;
+            width: 280px;
+            height: 180px;
+            background-color: #Ffc0cb;
+            top: 10px;
+            left: 10px;
+            transition: transform 0.5s;
+            transform: translateY(0);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-200px);
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" onclick="this.classList.toggle('open')">
+        <div class="letter">
+            <h2>Mi amor ❤️</h2>
+            <p>Escribe aquí tu mensaje romántico...</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.envelope').addEventListener('click', function() {
+            this.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
