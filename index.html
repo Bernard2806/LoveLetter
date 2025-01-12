@@ -22,6 +22,7 @@
             width: 300px;
             height: 200px;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         .envelope {
@@ -31,6 +32,7 @@
             background-color: #e6e6e6;
             border-radius: 4px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
         /* Solapa trasera (base del sobre) */
@@ -55,6 +57,7 @@
             border-bottom: 100px solid #d9d9d9;
             transform-origin: bottom;
             z-index: 2;
+            box-sizing: border-box;
         }
 
         /* Solapas laterales */
@@ -67,6 +70,7 @@
             border-bottom: 100px solid #f0f0f0;
             border-top: 100px solid #f0f0f0;
             z-index: 3;
+            box-sizing: border-box;
         }
 
         .left-flap {
@@ -83,6 +87,8 @@
         .top-flap {
             position: absolute;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
             height: 100%;
             background-color: #e6e6e6;
@@ -91,6 +97,7 @@
             transition: transform 0.6s ease-in-out;
             border-top: 2px solid #ccc;
             z-index: 4;
+            box-sizing: border-box;
         }
 
         .envelope.open .top-flap {
@@ -101,18 +108,21 @@
         .letter {
             position: absolute;
             width: 90%;
-            height: 140%;
+            height: 120%;
             background-color: #ffc0cb;
             top: 50%;
             left: 5%;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transform: translateY(0);
-            transition: transform 0.8s ease-in-out 0.3s;
+            transition: all 0.8s ease-in-out 0.3s;
             text-align: center;
             padding: 20px;
             font-size: 1em;
             z-index: 0;
+            box-sizing: border-box;
+            visibility: hidden;
+            opacity: 0;
         }
 
         .letter h2 {
@@ -128,43 +138,58 @@
         }
 
         .envelope.open ~ .letter {
-            transform: translateY(-160%);
+            transform: translateY(-120%);
+            visibility: visible;
+            opacity: 1;
         }
 
         /* Efecto hover */
         .envelope-container:hover {
             transform: scale(1.02);
-            transition: transform 0.3s ease;
         }
 
         /* Responsividad */
         @media (max-width: 480px) {
             .envelope-container {
-                width: 240px;
+                width: calc(100% - 40px);
+                max-width: 240px;
                 height: 160px;
             }
 
             .letter {
                 font-size: 0.9em;
                 padding: 15px;
+                height: 110%;
             }
 
             .bottom-flap {
-                border-left: 120px solid transparent;
-                border-right: 120px solid transparent;
-                border-bottom: 80px solid #d9d9d9;
+                border-left-width: calc(50% - 0px);
+                border-right-width: calc(50% - 0px);
+                border-bottom-width: 80px;
             }
 
             .left-flap {
-                border-right: 120px solid #d9d9d9;
-                border-bottom: 80px solid #f0f0f0;
-                border-top: 80px solid #f0f0f0;
+                border-right-width: calc(50% - 0px);
+                border-bottom-width: 80px;
+                border-top-width: 80px;
             }
 
             .right-flap {
-                border-left: 120px solid #d9d9d9;
-                border-bottom: 80px solid #f0f0f0;
-                border-top: 80px solid #f0f0f0;
+                border-left-width: calc(50% - 0px);
+                border-bottom-width: 80px;
+                border-top-width: 80px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .envelope-container {
+                width: calc(100% - 20px);
+                height: 140px;
+            }
+
+            .letter {
+                font-size: 0.8em;
+                padding: 10px;
             }
         }
     </style>
