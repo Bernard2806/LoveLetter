@@ -42,16 +42,3 @@ Este repositorio contiene el código de una animación interactiva de una carta 
    - Escalado proporcional de elementos
 
 ---
-
-### Instalación y Uso
-
-1. Clona el repositorio:
-```bash
-git clone https://github.com/tu-usuario/love-letter-animation.git
-```
-
-2. Abre el archivo `index.html` en tu navegador
-
-3. Personaliza el mensaje editando el contenido en la clase `letter`
-
----
