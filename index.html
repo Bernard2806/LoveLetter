@@ -203,16 +203,30 @@
             <div class="right-flap"></div>
             <div class="top-flap"></div>
         </div>
-        <div class="letter">
-            <h2>Mi amor ❤️</h2>
-            <p>Desde el primer día que te vi, supe que cambiarías mi vida para siempre. Te amo.</p>
+        <div class="letter" id="letter-content">
         </div>
     </div>
 
     <script>
+        const letterContent = {
+            title: "Mi amor ❤️",
+            message: "Desde el primer día que te vi, supe que cambiarías mi vida para siempre. Te amo."
+        };
+
+        function loadLetterContent() {
+            const letterDiv = document.getElementById('letter-content');
+            letterDiv.innerHTML = `
+                <h2>${letterContent.title}</h2>
+                <p>${letterContent.message}</p>
+            `;
+        }
+
         function toggleOpen() {
             document.querySelector('.envelope').classList.toggle('open');
         }
+
+        // Load content when page loads
+        loadLetterContent();
     </script>
 </body>
 </html>
