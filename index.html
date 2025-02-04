@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carta para mi amor</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://www.pinclipart.com/picdir/big/580-5803539_6-pixel-heart-pixel-art-heart-png-clipart.png" type="image/x-icon">
 </head>
 <body>
     <div class="envelope-container" onclick="toggleOpen()">
@@ -20,16 +21,34 @@
     </div>
 
     <script>
+        let frases = [];
         const letterContent = {
-            title: "Mi amor ❤️",
-            message: "Desde el primer día que te vi, supe que cambiarías mi vida para siempre. Te amo."
+            title: "Para Ambar ❤️"
         };
 
+        async function loadFrases() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                frases = data.frases;
+                loadLetterContent();
+            } catch (error) {
+                console.error('Error cargando frases:', error);
+            }
+        }
+
+        function getFraseAleatoria() {
+            const indice = Math.floor(Math.random() * frases.length);
+            return frases[indice];
+        }
+
         function loadLetterContent() {
+            const frase = getFraseAleatoria();
             const letterDiv = document.getElementById('letter-content');
             letterDiv.innerHTML = `
                 <h2>${letterContent.title}</h2>
-                <p>${letterContent.message}</p>
+                <p>${frase.texto}</p>
+                <small>Frase #${frase.id}</small>
             `;
         }
 
@@ -37,8 +56,8 @@
             document.querySelector('.envelope').classList.toggle('open');
         }
 
-        // Load content when page loads
-        loadLetterContent();
+        // Cargar frases cuando la página se inicie
+        loadFrases();
     </script>
 </body>
 </html>
