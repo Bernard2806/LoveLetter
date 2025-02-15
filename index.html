@@ -10,6 +10,53 @@
       href="https://www.pinclipart.com/picdir/big/580-5803539_6-pixel-heart-pixel-art-heart-png-clipart.png"
       type="image/x-icon"
     />
+    <style>
+      /* Estilo del botón romántico */
+      .love-button {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ff4d6d;
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        font-size: 18px;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+        animation: pulse 1.5s infinite alternate;
+      }
+
+      /* Efecto de pulso */
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.1);
+        }
+      }
+
+      /* Corazones flotantes */
+      .heart {
+        position: fixed;
+        font-size: 24px;
+        color: #ff4d6d;
+        animation: float 3s linear infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) scale(1.5);
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="envelope-container" onclick="toggleOpen()">
@@ -22,6 +69,9 @@
       </div>
       <div class="letter" id="letter-content"></div>
     </div>
+
+    <!-- Botón romántico -->
+    <button id="loveButton" class="love-button" onclick="redirectToLovePage()">💖 Carta Especial (San Valentín) 💖</button>
 
     <script>
       let frases = [];
@@ -61,16 +111,52 @@
         document.querySelector(".envelope").classList.toggle("open");
         isOpen = !isOpen;
 
-        // Si estaba abierto y ahora se cierra, preparamos la siguiente frase
         if (wasOpen && !isOpen) {
           setTimeout(() => {
-            loadLetterContent(); // Carga nueva frase mientras está cerrado
-          }, 500); // Espera 500ms para asegurar que la animación de cierre ya empezó
+            loadLetterContent();
+          }, 500);
         }
       }
 
-      // Cargar frases cuando la página se inicie
+      // Función para comprobar si es la semana de San Valentín
+      function checkSanValentinWeek() {
+        const today = new Date();
+        const month = today.getMonth() + 1; // Meses van de 0 a 11
+        const day = today.getDate();
+
+        if (month === 2 && day >= 12 && day <= 18) {
+          document.getElementById("loveButton").style.display = "block";
+        }
+      }
+
+      // Redirige a la página especial
+      function redirectToLovePage() {
+        // Efecto de corazones antes de redirigir
+        showHearts();
+        setTimeout(() => {
+          window.location.href = "https://eest1-my.sharepoint.com/:b:/g/personal/bgonzalezerramuspe_eest1chivilcoy_edu_ar/ETbjVWs23b1NuaAVVMx3EGIBM7c4Wezr0ut9gHTwUKC70Q?e=HhrqZZ";
+        }, 1500);
+      }
+
+      // Función para mostrar corazones flotantes
+      function showHearts() {
+        for (let i = 0; i < 10; i++) {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.innerHTML = "❤️";
+          heart.style.left = Math.random() * window.innerWidth + "px";
+          heart.style.bottom = "20px";
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 3000);
+        }
+      }
+
+      // Ejecutar al cargar la página
       loadFrases();
+      checkSanValentinWeek();
     </script>
   </body>
 </html>
